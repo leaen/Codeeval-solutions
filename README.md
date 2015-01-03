@@ -1,4 +1,4 @@
 Codeeval-solutions
 ==================
 
-Solutions to the problem on codeeval.
+Solutions to the problems on codeeval.
