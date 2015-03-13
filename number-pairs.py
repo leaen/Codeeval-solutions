@@ -1,32 +1,37 @@
-#incomplete
-
 import sys
 
-def solve(problem):
+def find_sums(numbers, target):
+    pairs = []
 
-	arr, test_sum = problem.strip().split(';')
-	test_sum = int(test_sum)
-	arr = list(map(int, arr.strip().split(',')))
-	pairs = []
-	last_i = 0
+    for number in numbers:
+        # We don't need to go past target/2, all the pairs would've been found by now.
+        if number > target / 2:
+            break
 
-	print(arr)
-	print(test_sum)
+        if target-number in numbers:
+            # Cool we found a pair
+            # Check edge case where number is half of target
+            if number // 2 == target:
+                if numbers.count(number) < 2:
+                    continue
 
-	for i in arr:
-		if i + last_i == test_sum:
-			pairs += [[last_i, i]]
-		else:
-			pass
-		last_i = i
+            pairs.append([number, target-number])
+    return pairs
 
-	print(pairs)
+def main():
+    with open(sys.argv[1]) as input_file:
+        for line in input_file:
+            numbers, target = line.strip().split(';')
+            numbers = list(map(int, numbers.split(',')))
+            target = int(target)
 
-	if len(pairs) > 0:
-		return ';'.join(list(map(lambda x: '{},{}'.format(*x), pairs)))
-	else:
-		return 'NULL'
+            pairs = find_sums(numbers, target)
+            pairs = [','.join(map(str, x)) for x in pairs]
 
-with open(sys.argv[1]) as input_file:
-	for problem in input_file.readlines():
-		print(solve(problem))
+            if pairs:
+                print(';'.join(pairs))
+            else:
+                print('NULL')
+
+if __name__ == '__main__':
+    main()
