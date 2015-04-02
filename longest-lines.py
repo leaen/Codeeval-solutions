@@ -9,7 +9,7 @@ def main():
     n = int(lines[0])
     number_of_lines = len(lines) - 1
 
-    scores = sorted([(len(x), x.strip()) for i, x in enumerate(lines[1:])], reverse=True)
+    scores = sorted([(len(x), x.strip()) for _, x in enumerate(lines[1:])], reverse=True)
     
     for line in range(n):
         print(scores[line][1])

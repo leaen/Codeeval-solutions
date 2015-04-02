@@ -1,13 +1,12 @@
 import sys
 import itertools
 
-class Minesweeper:
-
+class Minesweeper(object):
     def neighbours(self, pos):
         for dx, dy in (-1, 0), (1, 0), (0, -1), (0, 1):
             x = pos[0] + dx
             y = pos[1] + dy
-            
+
             if 0 <= x < self.width and 0 <= y < self.height:
                 yield (x, y)
 
@@ -33,11 +32,14 @@ class Minesweeper:
                             mines += 1
                     self.board[i][j] = str(mines)
         board_str = ''.join(list(itertools.chain(*self.board)))
-        print(board_str) 
+        print(board_str)
         return board_str
 
+def main():
+        with open(sys.argv[1]) as input_file:
+        for game in input_file.readlines():
+            m = Minesweeper(game.strip())
+            print(m.getSerializedBoard())
 
-with open(sys.argv[1]) as input_file:
-    for game in input_file.readlines():
-        m = Minesweeper(game.strip())
-        print(m.getSerializedBoard())
+if __name__ == '__main__':
+    main()

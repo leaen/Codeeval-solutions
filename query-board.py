@@ -1,17 +1,17 @@
 import sys
 
-class QueryBoard():
+class QueryBoard(object):
     def __init__(self, width=256, height=256):
         self.width = width
         self.height = height
         self.board = []
-        
+
         # Zero out board
-        for y in range(height):
-            self.board.append([0 for x in range(width)])
+        for _ in range(height):
+            self.board.append([0 for __ in range(width)])
 
     def setRow(self, i, x):
-        self.board[i] = [x for i in range(self.width)]        
+        self.board[i] = [x for _ in range(self.width)]
 
     def setCol(self, j, x):
         for row in self.board:
@@ -26,13 +26,13 @@ class QueryBoard():
 def main():
     b = QueryBoard()
     actions = []
-    
+
     with open(sys.argv[1]) as input_file:
         for line in input_file:
             actions.append(line.strip())
-    
+
     actions = [x.split() for x in actions]
-    
+
     for action in actions:
         if action[0] == 'SetCol':
             b.setCol(int(action[1]), int(action[2]))
@@ -44,6 +44,6 @@ def main():
             print(b.queryRow(int(action[1])))
         else:
             print('unknown action {}'.format(action))
-    
+
 if __name__ == '__main__':
     main()
