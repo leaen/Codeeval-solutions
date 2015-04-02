@@ -11,7 +11,10 @@ def rotate_serial_matrix(matrix):
     rotated_matrix = [reversed(row) for row in rotated_matrix]
     return ' '.join(list(itertools.chain(*rotated_matrix)))
 
-with open(sys.argv[1]) as input_file:
-    for line in input_file:
-        print(rotate_serial_matrix(line))
+def main():
+    with open(sys.argv[1]) as input_file:
+        for line in input_file:
+            print(rotate_serial_matrix(line))
 
+if __name__ == '__main__':
+    main()

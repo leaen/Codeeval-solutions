@@ -1,17 +1,18 @@
 import sys
-from itertools import product
+import itertools
 
 def main():
     with open(sys.argv[1]) as input_file:
         for line in input_file:
             length, letters = line.strip().split(',')
             
-            combinations = product(letters, repeat=int(length))
-            combinations = [''.join(x) for x in combinations]
+            length = int(length)
+            letters = letters.strip()
+
+            result = set(''.join(e) for e in itertools.product(letters, repeat=length))
+            result = sorted(result)
             
-            combinations = [x+y for x in letters for y in letters]
-
-            print(','.join(map(str, combinations)))
-
+            print(','.join(result))
+        
 if __name__ == '__main__':
     main()
